@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <header class="py-8">
+      <h2 class="font-bold text-center text-3xl">
+        <span class="text-blue-600">Mudaraba</span> System
+      </h2>
+    </header>
+
+    <main>
+      <section class="w-9/12 mx-auto bg-green-200 p-10 space-y-6">
+        <div
+          class="grid-cols-1 md:grid-cols-3 sm:grid-cols-2 grid gap-x-2 sm:gap-y-2 md:gap-y-4 gap-y-4"
+        >
+          <div
+            id="deposit-money"
+            class="bg-green-700 p-4 text-white rounded-md"
+          >
+            <h2 class="font-bold mb-2 text-xl">Deposit</h2>
+            <h2 class="text-2xl">$ <span id="deposit-amount">00</span></h2>
+          </div>
+
+          <div class="bg-red-700 p-4 text-white rounded-md" id="withdraw-money">
+            <h2 class="font-bold mb-2 text-xl">Withdraw</h2>
+            <h2 class="text-2xl">$ <span id="withdraw-amount">00</span></h2>
+          </div>
+          <div
+            class="bg-purple-700 p-4 text-white rounded-md"
+            id="total-balance"
+          >
+            <h2 class="font-bold mb-2 text-xl">Total Balance</h2>
+            <h2 class="text-2xl">$ <span id="total-amount">00</span></h2>
+          </div>
+        </div>
+        <div
+          class="grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 sm:gap-y-2 md:gap-y-4 grid gap-y-2 gap-x-2"
+        >
+          <div class="bg-blue-700 p-4 rounded-md space-y-2">
+            <h2 class="font-bold mb-2 text-xl text-white">Add money</h2>
+            <div class="flex flex-col w-9/12">
+              <input
+                class="p-2"
+                name="number"
+                id="add-input"
+                placeholder="Add Money"
+              />
+            </div>
+            <button
+              class="bg-purple-900 hover:bg-purple-700 text-white duration-500 py-2 px-6"
+              id="add-btn"
+            >
+              Add Money
+            </button>
+          </div>
+
+          <div class="bg-red-400 p-4 rounded-md space-y-2">
+            <h2 class="font-bold mb-2 text-xl text-white">Withdraw money</h2>
+            <div class="flex flex-col w-9/12">
+              <input
+                class="p-2"
+                name="number"
+                id="withdraw-input"
+                placeholder="Withdraw Money"
+              />
+            </div>
+            <button
+              class="bg-purple-900 text-white hover:bg-purple-700 duration-500 py-2 px-6"
+              id="withdraw-btn"
+            >
+              Withdraw Money
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./js/mudaraba.js"></script>
+  </body>
+</html>
