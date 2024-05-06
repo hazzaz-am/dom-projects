@@ -4,11 +4,23 @@ const loader = document.getElementById("loader");
 
 // global vaiable from photos array
 let photosArray = [];
+let totalImages = 0;
+let imagesLoaded = 0;
+let ready = false;
 
 // Unsplash Api
 const count = 10;
-const apiKey = "Your Secret Api Key";
+const apiKey = "RZ-TyQbbn6SqeDKHBM6OQOKH23ML8Z1hEBwjdFBMxjU";
 const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${count}`;
+
+// check image were loaded
+function imgLoaded() {
+  imagesLoaded++;
+  if (imagesLoaded === totalImages) {
+    ready = true;
+    loader.hidden = true;
+  }
+}
 
 // helper function to setAttributes
 function setAttributes(element, attributes) {
@@ -19,17 +31,17 @@ function setAttributes(element, attributes) {
 
 // display photos
 function displayPhotos() {
+  totalImages = 0;
+  totalImages = photosArray.length;
   photosArray.forEach((photo) => {
-    console.log(photo);
-
-    // create a element
+    // create <a> element
     const anchor = document.createElement("a");
     setAttributes(anchor, {
       href: photo.links.html,
       target: "_blank",
     });
 
-    // create image element
+    // create <image> element
     const image = document.createElement("img");
     setAttributes(image, {
       src: photo.urls.regular,
@@ -37,8 +49,12 @@ function displayPhotos() {
       title: photo.alt_description,
     });
 
-    anchor.appendChild(image)
-    imageContainer.appendChild(anchor)
+    // trigger this on window load
+    image.addEventListener("load", imgLoaded);
+
+    // append element to the conatainer
+    anchor.appendChild(image);
+    imageContainer.appendChild(anchor);
   });
 }
 
@@ -49,8 +65,20 @@ async function getPhotos() {
     photosArray = await response.json();
     displayPhotos();
   } catch (error) {
-    console.log(error);
+    // catch error
   }
 }
 
+// eventlistener for infinity scroll
+window.addEventListener("scroll", () => {
+  if (
+    window.scrollY + window.innerHeight >= document.body.offsetHeight - 1000 &&
+    ready
+  ) {
+    ready = false;
+    getPhotos();
+  }
+});
+
+// calling api on load
 getPhotos();
